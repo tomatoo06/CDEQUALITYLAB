@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../CDEQLAB/qr"
+		},
+		{
+			"path": "../CDEQLAB/personalities"
+		},
+		{
+			"path": "../CDEQLAB/brush"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "CDEQUALITYLAB"
+	}
+}
