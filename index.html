@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome</title>
     <style>
-                @font-face {
+        @font-face {
             font-family: 'DB Helvethaica X Ext';
             src: url('./ThaiSansNeue-SemiBold.otf') format('truetype');
         }
@@ -24,6 +24,7 @@
             text-align: center;
             opacity: 0;
             animation: fadeIn 0.8s ease forwards;
+            overflow: hidden;
         }
 
         @keyframes fadeIn {
@@ -31,18 +32,18 @@
                 opacity: 1;
             }
         }
-
+ 
         h1 {
             font-size: 10px;
             margin-bottom: 30px;
             color: #e35229;
-             font-family: 'DB Helvethaica X Ext';
+            font-family: 'DB Helvethaica X Ext';
             margin-top: -20px;
         }
 
         .logo-box {
             background-color: rgba(255, 255, 255, 0);
-            width: 300px;
+            width: 400px;
             height: 150px;
             margin-bottom: 40px;
             border-radius: 10px;
@@ -58,14 +59,68 @@
         .tap-to-start {
             font-size: 25px;
             color: rgb(255, 255, 255);
-            /* เทาจาง */
             cursor: pointer;
             transition: opacity 0.3s ease;
+            z-index: 2;
         }
 
         .tap-to-start:hover {
             opacity: 0.6;
         }
+
+        /* 🌟 ดาวระยิบระยับ */
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* ☄️ ดาวตกจากซ้ายไปขวา */
+.shooting-star {
+  position: fixed;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(white, transparent);
+  transform: rotate(-45deg); /* เปลี่ยนทิศ */
+  animation: shoot 2s linear forwards;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+@keyframes shoot {
+  0% {
+    top: -100px;
+    left: -200px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+    opacity: 0;
+  }
+}
     </style>
 </head>
 
@@ -85,6 +140,32 @@
                 window.location.href = "next.html"; // แก้ชื่อไฟล์ตามหน้าถัดไปของคุณ
             }, 500);
         }
+
+        // 🌟 สร้างดาวระยิบระยับ
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            document.body.appendChild(star);
+        }
+
+        // ☄️ ดาวตก
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.top = `${Math.random() * 50}vh`;
+            shootingStar.style.left = `${Math.random() * 100}vw`;
+            document.body.appendChild(shootingStar);
+
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 2000);
+        }
+
+        // สร้างดาวตกทุก 5 วิ
+        setInterval(createShootingStar, 5000);
     </script>
 </body>
 
