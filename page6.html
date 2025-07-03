@@ -157,6 +157,58 @@
                 /* บนมือถือ ขยับลงน้อยลง */
             }
         }
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite ease-in-out;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+
+            0%,
+            100% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* ☄️ ดาวตกจากซ้ายไปขวา */
+.shooting-star {
+  position: fixed;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(white, transparent);
+  transform: rotate(-45deg); /* เปลี่ยนทิศ */
+  animation: shoot 2s linear forwards;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+@keyframes shoot {
+  0% {
+    top: -100px;
+    left: -200px;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    left: 100%;
+    opacity: 0;
+  }
+}
     </style>
 </head>
 
@@ -198,12 +250,36 @@
             updateDisplay(currentIndex);
         }
 
-        function confirm() {
-            document.body.classList.add('fade-out');
-            setTimeout(() => {
-                window.location.href = `select-color.html?brush=${currentIndex}`;
-            }, 600);
-        }
+        function goToNext() {
+                document.body.style.opacity = 0;
+                setTimeout(() => {
+                    window.location.href = "personality.html"; // แก้ชื่อไฟล์ตามหน้าถัดไปของคุณ
+                }, 500);
+            }
+        for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.top = `${Math.random() * 100}vh`;
+                star.style.left = `${Math.random() * 100}vw`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                document.body.appendChild(star);
+            }
+
+            // ☄️ ดาวตก
+            function createShootingStar() {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                shootingStar.style.top = `${Math.random() * 50}vh`;
+                shootingStar.style.left = `${Math.random() * 100}vw`;
+                document.body.appendChild(shootingStar);
+
+                setTimeout(() => {
+                    shootingStar.remove();
+                }, 2000);
+            }
+
+            // สร้างดาวตกทุก 5 วิ
+            setInterval(createShootingStar, 5000);
     </script>
 </body>
 
