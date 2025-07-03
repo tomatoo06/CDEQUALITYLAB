@@ -250,12 +250,13 @@
             updateDisplay(currentIndex);
         }
 
-        function goToNext() {
-                document.body.style.opacity = 0;
+        function confirm() {
+                document.body.classList.add('fade-out');
                 setTimeout(() => {
-                    window.location.href = "personality.html"; // แก้ชื่อไฟล์ตามหน้าถัดไปของคุณ
-                }, 500);
+                    window.location.href = `select-color.html?brush=${currentIndex}`;
+                }, 600); // ตรงกับระยะเวลา fadeOut
             }
+
         for (let i = 0; i < 50; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
